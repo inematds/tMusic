@@ -1,17 +1,17 @@
-tmusic — Monorepo (Next.js + PNPM)
+﻿tmusic â€” Monorepo (Next.js + PNPM)
 
-Conteúdo
+ConteÃºdo
 
-- Apps: `apps/web` (Next.js 14 — App Router)
-- Pacotes: `packages/shared` (tipos/validações — a preencher)
+- Apps: `apps/web` (Next.js 14 â€” App Router)
+- Pacotes: `packages/shared` (tipos/validaÃ§Ãµes â€” a preencher)
 - Infra: `infra/docker-compose.yml` (Postgres)
 
-Pré‑requisitos
+PrÃ©â€‘requisitos
 
 - Node.js >= 18.17
 - PNPM >= 8
 
-Instalação
+InstalaÃ§Ã£o
 
 - `pnpm i`
 
@@ -31,22 +31,31 @@ Lint/Format
 
 Estrutura (web)
 
-- `app/` — páginas (App Router)
-  - `page.tsx` — Home com Top 10 por categoria (Músicas, Bandas, DJs, IA)
-  - `rankings/[category]/page.tsx` — páginas por categoria
-  - `api/v1/*` — rotas BFF (rankings, tracks, votes)
-- `components/` — UI (RankCard, RankSection, Filters, CategoryTabs, VoteToggle)
-- `lib/` — dados e mocks (rankings, tracks)
+- `app/` â€” pÃ¡ginas (App Router)
+  - `page.tsx` â€” Home com Top 10 por categoria (MÃºsicas, Bandas, DJs, IA)
+  - `rankings/[category]/page.tsx` â€” pÃ¡ginas por categoria
+  - `api/v1/*` â€” rotas BFF (rankings, tracks, votes)
+- `components/` â€” UI (RankCard, RankSection, Filters, CategoryTabs, VoteToggle)
+- `lib/` â€” dados e mocks (rankings, tracks)
 
 API (BFF)
 
-- `GET /api/v1/rankings?category&scope&platform&timeframe` — Top 10 por categoria (mock)
-- `GET /api/v1/tracks/[id]` — detalhe de faixa (mock)
-- `POST /api/v1/votes` — registra voto (gostei/neutral/detestei) [MVP]
+- `GET /api/v1/rankings?category&scope&platform&timeframe` â€” Top 10 por categoria (mock)
+- `GET /api/v1/tracks/[id]` â€” detalhe de faixa (mock)
+- `POST /api/v1/votes` â€” registra voto (gostei/neutral/detestei) [MVP]
 
-Próximos Passos
+PrÃ³ximos Passos
 
 - Prisma + Postgres para rankings reais e votos persistentes
-- Páginas de perfil para Bandas/DJs
+- PÃ¡ginas de perfil para Bandas/DJs
 - Testes (unit/integration/e2e) + CI
 
+
+Deploy
+- Produção: https://t-music-web.vercel.app
+- CI: GitHub Actions (lint/build) em .github/workflows/ci.yml
+- Vercel: Root apps/web, Install pnpm i, Build pnpm --filter @tmusic/web build, Output .next
+
+SEO
+- metadataBase configurado para a URL pública
+- OG image gerada em runtime (app/opengraph-image.tsx)

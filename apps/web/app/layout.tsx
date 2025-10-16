@@ -2,12 +2,14 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://t-music-web.vercel.app'),
   title: {
     default: 'tMusic — Tendências Musicais do Brasil',
     template: 'tMusic — %s',
   },
   description: 'Tops e tendências de Músicas, Bandas, DJs e conteúdos IA no Brasil.',
-  applicationName: 'tMusic',openGraph: {
+  applicationName: 'tMusic',
+  openGraph: {
     type: 'website',
     locale: 'pt_BR',
     siteName: 'tMusic',
@@ -97,7 +99,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <header>
           <div className="container">
             <div className="brand"><span className="dot" /> tMusic</div>
-            <div className="sub">Tendências Musicais do Brasil</div>
+            <div className="sub">tendências Musicais do Brasil</div>
           </div>
         </header>
         <main className="container">{children}</main>
@@ -105,6 +107,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
     </html>
   );
 }
+
+
 
 
 
