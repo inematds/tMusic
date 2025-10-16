@@ -1,0 +1,10 @@
+{
+  "updateSchedule": "0 3 * * *",
+  "apiBaseUrl": "http://localhost:3000",
+  "db": { "urlEnv": "DATABASE_URL" },
+  "links": {
+    "spotifyBase": "https://open.spotify.com/track/",
+    "youtubeBase": "https://youtube.com/watch?v="
+  }
+}
+

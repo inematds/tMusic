@@ -1,0 +1,21 @@
+{
+  "name": "tmusic",
+  "private": true,
+  "workspaces": [
+    "apps/web",
+    "packages/shared"
+  ],
+  "scripts": {
+    "dev": "pnpm --filter @tmusic/web dev",
+    "build": "pnpm --filter @tmusic/web build",
+    "start": "pnpm --filter @tmusic/web start",
+    "lint": "pnpm --filter @tmusic/web lint",
+    "bmad:refresh": "bmad-method install -f -i codex",
+    "bmad:list": "bmad-method list:agents",
+    "bmad:validate": "bmad-method validate"
+  },
+  "dependencies": {
+    "bmad-method": "^4.43.1"
+  },
+  "packageManager": "pnpm@10.18.3+sha512.bbd16e6d7286fd7e01f6b3c0b3c932cda2965c06a908328f74663f10a9aea51f1129eea615134bf992831b009eabe167ecb7008b597f40ff9bc75946aadfb08d"
+}
