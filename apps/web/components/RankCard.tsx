@@ -80,6 +80,8 @@ export default function RankCard({ kind, item }: { kind: RankKind; item: RankIte
   const [likes, setLikes] = useState<number>(item.likes ?? 0);
   const [dislikes, setDislikes] = useState<number>(item.dislikes ?? 0);
   const [vote, setVote] = useState<Vote>('neutral');
+  const hasTrends = typeof item.trend24h === 'number' || typeof item.trend7d === 'number';
+  const hasMetrics = typeof item.likes === 'number' || typeof item.dislikes === 'number' || typeof item.views === 'number';
 
   async function onVote(next: Vote) {
     const prev = vote;
@@ -117,16 +119,20 @@ export default function RankCard({ kind, item }: { kind: RankKind; item: RankIte
             <span className="chip">IA{item.origin ? ` • ${item.origin}` : ''}</span>
           )}
         </div>
-        <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-          <Trend value={item.trend24h} />
-          <span className="sep">•</span>
-          <Trend value={item.trend7d} />
-        </div>
-        <div className="metrics">
-          <span>Likes {fmt(likes)}</span>
-          <span>Dislikes {fmt(dislikes)}</span>
-          <span>Views {fmt(item.views)}</span>
-        </div>
+        {hasTrends && (
+          <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+            <Trend value={item.trend24h} />
+            <span className="sep">•</span>
+            <Trend value={item.trend7d} />
+          </div>
+        )}
+        {hasMetrics && (
+          <div className="metrics">
+            <span>Likes {fmt(likes)}</span>
+            <span>Dislikes {fmt(dislikes)}</span>
+            <span>Views {fmt(item.views)}</span>
+          </div>
+        )}
         <div onClick={(e) => e.stopPropagation()}>
           <VoteToggle initial={vote} onChange={onVote} />
         </div>
