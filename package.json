@@ -1,6 +1,7 @@
 {
   "name": "tmusic",
   "private": true,
+  "packageManager": "pnpm@10.18.3",
   "workspaces": [
     "apps/web",
     "packages/shared"
