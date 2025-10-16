@@ -59,3 +59,6 @@ Deploy
 SEO
 - metadataBase configurado para a URL pública
 - OG image gerada em runtime (app/opengraph-image.tsx)
+
+Documentação
+- Plano de Integração de Fontes & APIs: docs/roadmap-fontes-e-apis.md
