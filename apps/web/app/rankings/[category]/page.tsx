@@ -2,7 +2,7 @@
 import Filters from '../../../components/Filters';
 import RankSection from '../../../components/RankSection';
 import type { RankItem, RankKind } from '../../../components/RankCard';
-import { getItems } from '../../../lib/rankings';
+import { getItemsAsync } from '../../../lib/rankings';
 
 const TITLE: Record<string, string> = {
   musicas: 'Top 10 MÃºsicas',
@@ -25,7 +25,7 @@ export default async function CategoryPage({ params, searchParams }: { params: {
   const timeframe = (typeof searchParams.timeframe === 'string' ? searchParams.timeframe : '24h') ?? '24h';
 
   const qs = new URLSearchParams({ category, scope, platform, timeframe });
-  const data = { items: getItems(category) };
+  const data = { items: await getItemsAsync(category) };
 
   const paramsForTabs = new URLSearchParams({ scope, platform, timeframe });
   const kind = KIND_MAP[category] ?? 'musicas';

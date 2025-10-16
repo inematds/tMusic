@@ -1,7 +1,7 @@
 ﻿import RankSection from '../components/RankSection';
 import type { RankItem } from '../components/RankCard';
 import Filters from '../components/Filters';
-import { getItems } from '../lib/rankings';
+import { getItemsAsync } from '../lib/rankings';
 
 export default async function HomePage({ searchParams }: { searchParams: Record<string, string | string[] | undefined> }) {
   const scope = (typeof searchParams.scope === 'string' ? searchParams.scope : 'br') ?? 'br';
@@ -9,10 +9,10 @@ export default async function HomePage({ searchParams }: { searchParams: Record<
   const timeframe = (typeof searchParams.timeframe === 'string' ? searchParams.timeframe : '24h') ?? '24h';
 
   const [musicas, bandas, djs, ia] = await Promise.all([
-    Promise.resolve(getItems('musicas')),
-    Promise.resolve(getItems('bandas')),
-    Promise.resolve(getItems('djs')),
-    Promise.resolve(getItems('ia')),
+    getItemsAsync('musicas'),
+    getItemsAsync('bandas'),
+    getItemsAsync('djs'),
+    getItemsAsync('ia'),
   ]);
 
   return (
