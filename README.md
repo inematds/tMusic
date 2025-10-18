@@ -62,3 +62,7 @@ SEO
 
 Documentação
 - Plano de Integração de Fontes & APIs: docs/roadmap-fontes-e-apis.md
+
+Documentação
+- Plano de Integração de Fontes & APIs: docs/roadmap-fontes-e-apis.md
+- Plano de Negócio: docs/negocio/plano.md
