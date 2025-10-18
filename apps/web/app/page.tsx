@@ -7,12 +7,13 @@ export default async function HomePage({ searchParams }: { searchParams: Record<
   const scope = (typeof searchParams.scope === 'string' ? searchParams.scope : 'br') ?? 'br';
   const platform = (typeof searchParams.platform === 'string' ? searchParams.platform : 'all') ?? 'all';
   const timeframe = (typeof searchParams.timeframe === 'string' ? searchParams.timeframe : '24h') ?? '24h';
+  const source = (typeof searchParams.source === 'string' ? searchParams.source : 'all') ?? 'all';
 
   const [musicas, bandas, djs, ia] = await Promise.all([
-    getItemsAsync('musicas'),
-    getItemsAsync('bandas'),
-    getItemsAsync('djs'),
-    getItemsAsync('ia'),
+    getItemsAsync('musicas', { source: source as any, platform: platform as any, timeframe: timeframe as any }),
+    getItemsAsync('bandas', { source: source as any, platform: platform as any, timeframe: timeframe as any }),
+    getItemsAsync('djs', { source: source as any, platform: platform as any, timeframe: timeframe as any }),
+    getItemsAsync('ia', { source: source as any, platform: platform as any, timeframe: timeframe as any }),
   ]);
 
   return (
@@ -23,7 +24,7 @@ export default async function HomePage({ searchParams }: { searchParams: Record<
           <div className="sub">Filtros aplicados abaixo</div>
         </div>
       </div>
-      <Filters basePath={`/`} searchParams={new URLSearchParams({ scope, platform, timeframe })} />
+      <Filters basePath={`/`} searchParams={new URLSearchParams({ scope, platform, timeframe, source })} />
       <div className="grid-cats">
         <RankSection title="Top 10 Músicas" kind="musicas" items={musicas} />
         <RankSection title="Top 10 Bandas" kind="bandas" items={bandas} />

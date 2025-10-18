@@ -23,11 +23,12 @@ export default async function CategoryPage({ params, searchParams }: { params: {
   const scope = (typeof searchParams.scope === 'string' ? searchParams.scope : 'br') ?? 'br';
   const platform = (typeof searchParams.platform === 'string' ? searchParams.platform : 'all') ?? 'all';
   const timeframe = (typeof searchParams.timeframe === 'string' ? searchParams.timeframe : '24h') ?? '24h';
+  const source = (typeof searchParams.source === 'string' ? searchParams.source : 'all') ?? 'all';
 
-  const qs = new URLSearchParams({ category, scope, platform, timeframe });
-  const data = { items: await getItemsAsync(category) };
+  const qs = new URLSearchParams({ category, scope, platform, timeframe, source });
+  const data = { items: await getItemsAsync(category, { source: source as any, platform: platform as any, timeframe: timeframe as any }) };
 
-  const paramsForTabs = new URLSearchParams({ scope, platform, timeframe });
+  const paramsForTabs = new URLSearchParams({ scope, platform, timeframe, source });
   const kind = KIND_MAP[category] ?? 'musicas';
   const items = (data.items ?? []) as RankItem[];
 

@@ -21,6 +21,7 @@ export default function Filters({ basePath, searchParams }: FilterProps) {
   const scope = searchParams.get('scope') ?? 'br';
   const platform = searchParams.get('platform') ?? 'all';
   const timeframe = searchParams.get('timeframe') ?? '24h';
+  const source = searchParams.get('source') ?? 'all';
 
   const makeHref = (updates: Record<string, string>) => {
     const sp = new URLSearchParams(searchParams);
@@ -36,7 +37,12 @@ export default function Filters({ basePath, searchParams }: FilterProps) {
       <Chip href={makeHref({ platform: 'youtube' })} label="YouTube" active={platform === 'youtube'} />
       <Chip href={makeHref({ timeframe: '24h' })} label="24h" active={timeframe === '24h'} />
       <Chip href={makeHref({ timeframe: '7d' })} label="7d" active={timeframe === '7d'} />
+      {/* Fontes */}
+      <Chip href={makeHref({ source: 'all' })} label="Todos" active={source === 'all'} />
+      <Chip href={makeHref({ source: 'spotify' })} label="Spotify" active={source === 'spotify'} />
+      <Chip href={makeHref({ source: 'youtube' })} label="YouTube" active={source === 'youtube'} />
+      <Chip href={makeHref({ source: 'apple' })} label="Apple" active={source === 'apple'} />
+      <Chip href={makeHref({ source: 'deezer' })} label="Deezer" active={source === 'deezer'} />
     </div>
   );
 }
-

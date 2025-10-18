@@ -87,10 +87,10 @@ export function getItems(category: string) {
   return MUSICAS;
 }
 
-export async function getItemsAsync(category: string) {
+export async function getItemsAsync(category: string, opts?: { source?: 'all'|'spotify'|'youtube'|'apple'|'deezer'; platform?: 'all'|'spotify'|'youtube'; timeframe?: '24h'|'7d' }) {
   if (category === 'musicas') {
     try {
-      const ext = await getTopTracksExternal(10);
+      const ext = await getTopTracksExternal({ limit: 10, source: opts?.source ?? 'all', platform: opts?.platform ?? 'all', timeframe: opts?.timeframe ?? '24h' });
       if (ext.length) {
         return ext.map((m, idx) => ({
           position: idx + 1,

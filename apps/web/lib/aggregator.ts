@@ -15,10 +15,16 @@ function keyOf(it: AggregatedItem) {
   return `${title}::${artist}`;
 }
 
-export async function getTopTracksExternal(limit = 10): Promise<AggregatedItem[]> {
+export async function getTopTracksExternal(opts?: { limit?: number; source?: 'all'|'apple'|'deezer'|'spotify'|'youtube'; platform?: 'all'|'spotify'|'youtube'; timeframe?: '24h'|'7d' }): Promise<AggregatedItem[]> {
+  const limit = opts?.limit ?? 10;
+  const source = (opts?.source ?? 'all').toLowerCase() as 'all'|'apple'|'deezer'|'spotify'|'youtube';
+
+  const wantApple = source === 'all' || source === 'apple';
+  const wantDeezer = source === 'all' || source === 'deezer';
+
   const [apple, deezer] = await Promise.all([
-    fetchAppleTopSongs(50).catch(() => []),
-    fetchDeezerTopTracks(50).catch(() => []),
+    wantApple ? fetchAppleTopSongs(50).catch(() => []) : Promise.resolve([]),
+    wantDeezer ? fetchDeezerTopTracks(50).catch(() => []) : Promise.resolve([]),
   ]);
 
   // scoring by position (higher is better)
@@ -34,8 +40,8 @@ export async function getTopTracksExternal(limit = 10): Promise<AggregatedItem[]
     });
   };
 
-  applyList(apple, 50);
-  applyList(deezer, 50);
+  if (apple.length) applyList(apple, 50);
+  if (deezer.length) applyList(deezer, 50);
 
   const ranked = Array.from(scoreMap.values())
     .sort((a, b) => b.score - a.score)
@@ -44,4 +50,3 @@ export async function getTopTracksExternal(limit = 10): Promise<AggregatedItem[]
 
   return ranked;
 }
-
